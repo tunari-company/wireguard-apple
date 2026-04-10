@@ -16,10 +16,7 @@ let package = Package(
     targets: [
         .target(
             name: "WireGuardKit",
-            dependencies: ["WireGuardKitGo", "WireGuardKitC"],
-            linkerSettings: [
-                .linkedLibrary("wg-go")
-            ]
+            dependencies: ["WireGuardKitGo", "WireGuardKitC"]
         ),
         .target(
             name: "WireGuardKitC",
@@ -38,10 +35,7 @@ let package = Package(
                 "libwg-go.a"
             ],
             publicHeadersPath: ".",
-            linkerSettings: [
-                .unsafeFlags(["-L", "Sources/WireGuardKitGo"]),
-                .linkedLibrary("wg-go")
-            ]
+            linkerSettings: [.linkedLibrary("wg-go")]
         )
     ]
 )
