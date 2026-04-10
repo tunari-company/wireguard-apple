@@ -16,7 +16,10 @@ let package = Package(
     targets: [
         .target(
             name: "WireGuardKit",
-            dependencies: ["WireGuardKitGo", "WireGuardKitC"]
+            dependencies: ["WireGuardKitGo", "WireGuardKitC"],
+            linkerSettings: [
+                .linkedLibrary("wg-go")
+            ]
         ),
         .target(
             name: "WireGuardKitC",
@@ -31,9 +34,14 @@ let package = Package(
                 "go.mod",
                 "go.sum",
                 "api-apple.go",
-                "Makefile"
+                "Makefile",
+                "libwg-go.a"
             ],
-            publicHeadersPath: "."
+            publicHeadersPath: ".",
+            linkerSettings: [
+                .unsafeFlags(["-L", "Sources/WireGuardKitGo"]),
+                .linkedLibrary("wg-go")
+            ]
         )
     ]
 )
